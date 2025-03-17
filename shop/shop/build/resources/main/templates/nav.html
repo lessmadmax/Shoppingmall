@@ -1,0 +1,10 @@
+<div class="nav" th:fragment="navbar">
+    <a class="logo">SpringMall</a>
+    <a href="/list/page/1">List</a>
+    <a href="/write">Write</a>
+    <a href="/">Home</a>
+    <div sec:authorize="isAuthenticated()">
+    <span sec:authentication="principal.username"></span>
+        <a href="/logout"> 로그아웃</a>
+    </div>
+</div>

@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link href="/main.css" rel="stylesheet">
+
+</head>
+<body>
+<div th:replace="~{ nav.html::navbar }"></div>
+<div class="card" th:each="i : ${items}">
+    <img src="https://placehold.co/300">
+    <div>
+        <h4 th:text="${i.getTitle()}"
+            th:onclick="|window.location.href='@{/detail/}' + ${i.getId()};|"
+            style="cursor: pointer;"></h4>
+        <p th:text="${i.getPrice()}"></p>
+        <button
+                th:onclick="|window.location.href='@{/edit/}' + ${i.getId()};|"
+        >수정</button>
+
+        <button th:onclick="fetch('/delete?id=[[${i.id}]]',
+        { method : 'DELETE' })
+        .then(res => res.text())
+        .then(res => {
+            location.reload();
+            console.log(res);
+        })"
+        >삭제</button>
+    </div>
+
+</div>
+
+
+</body>
+</html>
